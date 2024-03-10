@@ -81,7 +81,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
 
     public long addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        //
+        ContentValues cv = new ContentValues();
         return 0;
     }
 
