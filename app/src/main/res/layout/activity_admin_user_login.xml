@@ -2,9 +2,182 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminUserLogin_Activity">
+
+    <EditText
+        android:id="@+id/login_id_et"
+        android:layout_width="215dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="98dp"
+        android:ems="10"
+        android:hint="Email/Mobile No."
+        android:inputType="text"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/create_now_tv"
+        android:layout_width="95dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="158dp"
+        android:clickable="true"
+        android:text="Create now"
+        android:textAlignment="center"
+        android:textColor="#4CAF50"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_ac_tv"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="215dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="98dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_id_et" />
+
+    <TextView
+        android:id="@+id/no_ac_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="97dp"
+        android:text="Don't have an account with us?"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/user_login_image_button"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="276dp"
+        android:layout_marginEnd="143dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user_login_logo"
+        tools:ignore="DuplicateIds,MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/admin_login_Image_button"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="143dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_tv"
+        app:srcCompat="@drawable/admin_login_logo" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="161dp"
+        android:text="LOGIN"
+        android:visibility="invisible"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_et" />
+
+    <TextView
+        android:id="@+id/hi_id_tv"
+        android:layout_width="270dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="45dp"
+        android:text="Hi! Identify yourself"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="center"
+        tools:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/user_tv"
+        android:layout_width="84dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="164dp"
+        android:text="User"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_login_image_button" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="156dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/admin_tv"
+        android:layout_width="84dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="164dp"
+        android:text="Admin"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/admin_login_Image_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
