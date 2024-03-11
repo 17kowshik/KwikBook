@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "library_database";
@@ -17,7 +18,6 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_MOBILE_NUM = "mobilenum";
-    private static final String COLUMN_GENDER = "gender";
 
     // Books table
     private static final String TABLE_BOOKS = "books";
@@ -47,8 +47,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_USERNAME + " TEXT, "
                 + COLUMN_PASSWORD + " TEXT, "
                 + COLUMN_NAME + " TEXT, "
-                + COLUMN_MOBILE_NUM + " TEXT, "
-                + COLUMN_GENDER + " TEXT)";
+                + COLUMN_MOBILE_NUM + " TEXT)";
         db.execSQL(createUserTableQuery);
 
         String createBooksTableQuery = "CREATE TABLE " + TABLE_BOOKS + " ("
@@ -69,6 +68,10 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(" + COLUMN_USER_RECORD_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "), "
                 + "FOREIGN KEY(" + COLUMN_BOOK_RECORD_ID + ") REFERENCES " + TABLE_BOOKS + "(" + COLUMN_BOOK_ID + "))";
         db.execSQL(createLendingRecordsTableQuery);
+
+
+        addAdmin(db);
+        addInitialUser(db);
     }
 
     @Override
@@ -78,11 +81,23 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LENDING_RECORDS);
         onCreate(db);
     }
+    private void addInitialUser(SQLiteDatabase db) {
+        User firstUser = new User("test", "kb", "KwikBook", "987543210");
+        addUser(db, firstUser);
+    }
 
-    public long addUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    private void addAdmin(SQLiteDatabase db){
+        User admin = new User("admin", "adminAccess", "Administrator", "999999999");
+        addUser(db, admin);
+    }
+
+    public void addUser(SQLiteDatabase db, User user) {
         ContentValues cv = new ContentValues();
-        return 0;
+        cv.put(COLUMN_USERNAME, user.getUsername());
+        cv.put(COLUMN_PASSWORD, user.getPassword());
+        cv.put(COLUMN_NAME, user.getName());
+        cv.put(COLUMN_MOBILE_NUM, user.getMobileNum());
+        db.insert(TABLE_USERS, null, cv);
     }
 
     public int updateUser(User user) {
@@ -154,6 +169,23 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         //
         return null;
+    }
+
+    public boolean authenticateUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        final String TABLE_USERS = "users";
+        final String COLUMN_USERNAME = "username";
+        final String COLUMN_PASSWORD = "password";
+        Cursor cursor = db.query(TABLE_USERS, null, COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + " = ?",
+                new String[]{username, password}, null, null, null);
+
+        boolean isAuthenticated = cursor != null && cursor.moveToFirst();
+
+        if (cursor != null) {
+            cursor.close();
+            db.close();
+        }
+        return isAuthenticated;
     }
 }
 

@@ -7,18 +7,16 @@ public class User {
     private String password;
     private String name;
     private String mobileNum;
-    private String gender;
 
     public User() {
         // Default constructor
     }
 
-    public User(String username, String password, String name, String mobileNum, String gender) {
+    public User(String username, String password, String name, String mobileNum) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.mobileNum = mobileNum;
-        this.gender = gender;
     }
 
     // Getter and Setter methods for each field
@@ -61,14 +59,6 @@ public class User {
 
     public void setMobileNum(String mobileNum) {
         this.mobileNum = mobileNum;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 }
 

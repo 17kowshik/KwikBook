@@ -1,6 +1,8 @@
 package com.example.kwikbook;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminUserLogin_Activity extends AppCompatActivity {
+
     ImageButton userLogo, adminLogo;
     TextView hi_text, user_text, admin_text, no_ac_text, create_now_text;
     EditText login_et, pass_et;
@@ -34,10 +37,12 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
         pass_et = findViewById(R.id.password_et);
         login_but = findViewById(R.id.login_button);
 
+        LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(AdminUserLogin_Activity.this);
         userLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (flag == 0) {
+                    userLogo.setImageResource(R.drawable.user_login_logo);
                     hi_text.setVisibility(View.INVISIBLE);
                     user_text.setVisibility(View.INVISIBLE);
                     adminLogo.setVisibility(View.INVISIBLE);
@@ -49,13 +54,21 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
                     create_now_text.setVisibility(View.VISIBLE);
                     flag = 1;
 
-                    String userId = login_et.getText().toString();
-                    String pwd = pass_et.getText().toString();
-
                     login_but.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //code to check id and password in the Database
+
+                            String userId = login_et.getText().toString();
+                            String pwd = pass_et.getText().toString();
+
+                            if (ldbHelper.authenticateUser(userId,pwd)){
+                                // Starting Intent to User's Home Page
+                                Toast.makeText(AdminUserLogin_Activity.this, "Successfully Logged In!, Welcome to KwikBook", Toast.LENGTH_SHORT).show();
+                                Intent loginToHome = new Intent(AdminUserLogin_Activity.this, UserHome_Activity.class);
+                                startActivity(loginToHome);
+                            } else{
+                                Toast.makeText(AdminUserLogin_Activity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
 
@@ -78,6 +91,7 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
                     login_but.setVisibility(View.INVISIBLE);
                     no_ac_text.setVisibility(View.INVISIBLE);
                     create_now_text.setVisibility(View.INVISIBLE);
+                    userLogo.setImageResource(R.drawable.user_login_logo);
                     flag = 0;
                 }
             }
@@ -87,25 +101,33 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (flag == 0) {
+                    userLogo.setImageResource(R.drawable.admin_login_logo);
                     hi_text.setVisibility(View.INVISIBLE);
                     user_text.setVisibility(View.INVISIBLE);
-                    userLogo.setVisibility(View.INVISIBLE);
+                    userLogo.setVisibility(View.VISIBLE);
                     admin_text.setVisibility(View.INVISIBLE);
+                    adminLogo.setVisibility(View.INVISIBLE);
                     login_et.setVisibility(View.VISIBLE);
                     pass_et.setVisibility(View.VISIBLE);
                     login_but.setVisibility(View.VISIBLE);
                     flag = 1;
 
-                    //animation to move admin logo up
-                    // delay of 0.5 to 1 seconds
-
-                    String userId = login_et.getText().toString();
-                    String pwd = pass_et.getText().toString();
-
                     login_but.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
-                            //code to check id and password in the Database
+
+                            String userId = login_et.getText().toString();
+                            String pwd = pass_et.getText().toString();
+
+                            if (ldbHelper.authenticateUser(userId,pwd)){
+                                // Starting Intent to Admin's Home Page
+                                Toast.makeText(AdminUserLogin_Activity.this, "Successfully Logged In!", Toast.LENGTH_SHORT).show();
+                                Intent loginToHome = new Intent(AdminUserLogin_Activity.this, AdminHome_Activity.class);
+                                startActivity(loginToHome);
+                            } else{
+                                Toast.makeText(AdminUserLogin_Activity.this, "Invalid Admin Credentials !!", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
 
@@ -117,10 +139,14 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
                     login_et.setVisibility(View.INVISIBLE);
                     pass_et.setVisibility(View.INVISIBLE);
                     login_but.setVisibility(View.INVISIBLE);
+                    adminLogo.setVisibility(View.VISIBLE);
+                    userLogo.setImageResource(R.drawable.user_login_logo);
                     flag = 0;
                 }
             }
         });
 
+
     }
+
 }

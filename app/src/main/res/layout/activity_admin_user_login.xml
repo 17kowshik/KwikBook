@@ -14,7 +14,7 @@
         android:layout_marginTop="440dp"
         android:layout_marginEnd="98dp"
         android:ems="10"
-        android:hint="Email/Mobile No."
+        android:hint="Username (Email)"
         android:inputType="text"
         android:textSize="18sp"
         android:visibility="invisible"
@@ -128,12 +128,13 @@
         android:layout_marginTop="216dp"
         android:layout_marginEnd="45dp"
         android:text="Hi! Identify yourself"
+        android:textAlignment="viewStart"
         app:flow_horizontalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:textAlignment="center"
-        tools:textSize="30sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/user_tv"
@@ -157,12 +158,11 @@
         android:layout_marginStart="155dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="156dp"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        app:srcCompat="@drawable/ic_launcher_foreground"
         tools:visibility="visible" />
 
     <TextView
