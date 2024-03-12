@@ -187,5 +187,20 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         }
         return isAuthenticated;
     }
+
+    public boolean doesUserExist(SQLiteDatabase db, String email) {
+        Cursor cursor = null;
+
+        try {
+            // Query to check if the user with the given email exists
+            String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERNAME + " = ?";
+            cursor = db.rawQuery(query, new String[]{email});
+            return cursor != null && cursor.getCount() > 0;
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
 }
 

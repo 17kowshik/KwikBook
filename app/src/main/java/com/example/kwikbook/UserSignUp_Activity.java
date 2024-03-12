@@ -45,11 +45,18 @@ public class UserSignUp_Activity extends AppCompatActivity {
                     } else {
                         LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(UserSignUp_Activity.this);
                         SQLiteDatabase db = ldbHelper.getWritableDatabase();
-                        User newUser = new User(email,password,name,mobile);
-                        ldbHelper.addUser(db, newUser);
-                        Toast.makeText(UserSignUp_Activity.this, "Successfully Signed Up!, Welcome to KwikBook", Toast.LENGTH_SHORT).show();
-                        Intent loginToHome = new Intent(UserSignUp_Activity.this, UserHome_Activity.class);
-                        startActivity(loginToHome);
+
+                        // Checking if the email already exists in the database
+                        if (ldbHelper.doesUserExist(db, email)) {
+                            Toast.makeText(UserSignUp_Activity.this, "Account with this email already exists", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If email doesn't exist, proceeding with user registration
+                            User newUser = new User(email, password, name, mobile);
+                            ldbHelper.addUser(db, newUser);
+                            Toast.makeText(UserSignUp_Activity.this, "Successfully Signed Up! Welcome to KwikBook", Toast.LENGTH_SHORT).show();
+                            Intent loginToHome = new Intent(UserSignUp_Activity.this, UserHome_Activity.class);
+                            startActivity(loginToHome);
+                        }
                     }
                 }
             }
