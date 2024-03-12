@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminHome_Activity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <ImageView
+      android:id="@+id/updateDBid"
+      android:layout_width="300dp"
+      android:layout_height="150dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:srcCompat="@drawable/admin_login_logo"
+      tools:layout_editor_absoluteY="82dp" />
+
+  <ImageView
+      android:id="@+id/lendingReportsid"
+      android:layout_width="300dp"
+      android:layout_height="150dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:srcCompat="@drawable/admin_login_logo"
+      tools:layout_editor_absoluteY="257dp" />
+
+  <ImageView
+      android:id="@+id/penaltyInvoicesid"
+      android:layout_width="300dp"
+      android:layout_height="150dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:srcCompat="@drawable/admin_login_logo"
+      tools:layout_editor_absoluteY="439dp" />
+
+  <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/dela_gothic_one"
+      android:text="Welcome Admin!!!"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:layout_editor_absoluteY="33dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
