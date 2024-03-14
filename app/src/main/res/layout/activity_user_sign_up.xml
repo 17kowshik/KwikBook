@@ -8,7 +8,7 @@
     tools:context=".UserSignUp_Activity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="155dp"
@@ -92,7 +92,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
     <EditText
         android:id="@+id/signup_confirm_password_et"

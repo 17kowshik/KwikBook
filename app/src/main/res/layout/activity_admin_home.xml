@@ -10,42 +10,51 @@
   <ImageView
       android:id="@+id/updateDBid"
       android:layout_width="300dp"
-      android:layout_height="150dp"
+      android:layout_height="0dp"
+      android:layout_marginBottom="25dp"
+      app:layout_constraintBottom_toTopOf="@+id/lendingReportsid"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:srcCompat="@drawable/admin_login_logo"
-      tools:layout_editor_absoluteY="82dp" />
+      app:layout_constraintTop_toBottomOf="@+id/textView"
+      app:srcCompat="@drawable/admin_login_logo" />
 
   <ImageView
       android:id="@+id/lendingReportsid"
       android:layout_width="300dp"
-      android:layout_height="150dp"
+      android:layout_height="0dp"
+      android:layout_marginBottom="32dp"
+      app:layout_constraintBottom_toTopOf="@+id/penaltyInvoicesid"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:srcCompat="@drawable/admin_login_logo"
-      tools:layout_editor_absoluteY="257dp" />
+      app:layout_constraintTop_toBottomOf="@+id/updateDBid"
+      app:srcCompat="@drawable/admin_login_logo" />
 
   <ImageView
       android:id="@+id/penaltyInvoicesid"
       android:layout_width="300dp"
-      android:layout_height="150dp"
+      android:layout_height="0dp"
+      android:layout_marginBottom="142dp"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:srcCompat="@drawable/admin_login_logo"
-      tools:layout_editor_absoluteY="439dp" />
+      app:layout_constraintTop_toBottomOf="@+id/lendingReportsid"
+      app:srcCompat="@drawable/admin_login_logo" />
 
   <TextView
       android:id="@+id/textView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="33dp"
+      android:layout_marginBottom="19dp"
       android:fontFamily="@font/dela_gothic_one"
       android:text="Welcome Admin!!!"
       android:textSize="20sp"
+      app:layout_constraintBottom_toTopOf="@+id/updateDBid"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
-      tools:layout_editor_absoluteY="33dp" />
+      app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
