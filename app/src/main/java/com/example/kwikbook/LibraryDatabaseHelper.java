@@ -100,49 +100,67 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_USERS, null, cv);
     }
 
-    public int updateUser(User user) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
-        return 0;
+    public void updateUser(SQLiteDatabase db, User user) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USERNAME, user.getUsername());
+        cv.put(COLUMN_PASSWORD, user.getPassword());
+        cv.put(COLUMN_NAME, user.getName());
+        cv.put(COLUMN_MOBILE_NUM, user.getMobileNum());
+        db.update(TABLE_USERS, cv, COLUMN_USER_ID + "=?", new String[]{String.valueOf(user.getId())});
     }
 
-    public void removeUser(long userId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
+    public void removeUser(SQLiteDatabase db, long userId) {
+        db.delete(TABLE_USERS, COLUMN_USER_ID + "=?", new String[]{String.valueOf(userId)});
     }
 
-    public long addBook(Book book) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
-        return 0;
+    public void addBook(SQLiteDatabase db, Book book) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_BOOK_NAME, book.getName());
+        cv.put(COLUMN_AUTHOR, book.getAuthor());
+        cv.put(COLUMN_YEAR, book.getYear());
+        cv.put(COLUMN_SYNOPSIS, book.getSynopsis());
+        db.insert(TABLE_BOOKS, null, cv);
     }
 
-    public int updateBook(Book book) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
-        return 0;
+    public void updateBook(SQLiteDatabase db, Book book) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_BOOK_NAME, book.getName());
+        cv.put(COLUMN_AUTHOR, book.getAuthor());
+        cv.put(COLUMN_YEAR, book.getYear());
+        cv.put(COLUMN_SYNOPSIS, book.getSynopsis());
+        db.update(TABLE_BOOKS, cv, COLUMN_BOOK_ID + "=?", new String[]{String.valueOf(book.getId())});
+
     }
 
-    public void removeBook(long bookId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
+    public void removeBook(SQLiteDatabase db, long bookId) {
+        db.delete(TABLE_BOOKS, COLUMN_BOOK_ID + "=?", new String[]{String.valueOf(bookId)});
     }
 
-    public long addLendingRecord(LendingRecord lendingRecord) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
-        return 0;
+    public void addLendingRecord(SQLiteDatabase db, LendingRecord lendingRecord) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USER_RECORD_ID, lendingRecord.getUserId());
+        cv.put(COLUMN_BOOK_RECORD_ID, lendingRecord.getBookId());
+        cv.put(COLUMN_LENDING_DATE, lendingRecord.getLendingDate());
+        cv.put(COLUMN_RETURN_DATE, lendingRecord.getReturnDate());
+        cv.put(COLUMN_FINE, lendingRecord.getFine());
+        db.insert(TABLE_LENDING_RECORDS, null, cv);
+
     }
 
-    public int updateLendingRecord(LendingRecord lendingRecord) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
-        return 0;
+    public void updateLendingRecord(SQLiteDatabase db, LendingRecord lendingRecord) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_USER_RECORD_ID, lendingRecord.getUserId());
+        cv.put(COLUMN_BOOK_RECORD_ID, lendingRecord.getBookId());
+        cv.put(COLUMN_LENDING_DATE, lendingRecord.getLendingDate());
+        cv.put(COLUMN_RETURN_DATE, lendingRecord.getReturnDate());
+        cv.put(COLUMN_FINE, lendingRecord.getFine());
+        db.update(TABLE_LENDING_RECORDS, cv, COLUMN_RECORD_ID + "=?", new String[]{String.valueOf(lendingRecord.getId())});
+
+
     }
 
-    public void removeLendingRecord(long recordId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //
+    public void removeLendingRecord(SQLiteDatabase db, long recordId) {
+        db.delete(TABLE_LENDING_RECORDS, COLUMN_RECORD_ID + "=?", new String[]{String.valueOf(recordId)});
     }
 
     public void lendBook(long userId, long bookId, String lendingDate, String returnDate) {
@@ -150,8 +168,10 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Method for returning a book
-    public void returnBook(long recordId, String returnDate) {
-        //
+    public void returnBook(SQLiteDatabase db, long recordId, String returnDate) {
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_RETURN_DATE, returnDate);
+        db.update(TABLE_LENDING_RECORDS, cv, COLUMN_RECORD_ID + "=?", new String[]{String.valueOf(recordId)});
     }
 
     // Method for generating a fine
