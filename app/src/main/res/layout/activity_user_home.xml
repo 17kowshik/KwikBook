@@ -7,4 +7,93 @@
     android:layout_height="match_parent"
     tools:context=".UserHome_Activity">
 
+    <ImageView
+        android:id="@+id/contactUsID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="57dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/payID"
+        app:layout_constraintTop_toBottomOf="@+id/lendingHistoryID"
+        app:srcCompat="@drawable/user_login_logo" />
+
+    <ImageView
+        android:id="@+id/payID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="57dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/contactUsID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/libraryCatalogueID"
+        app:srcCompat="@drawable/user_login_logo" />
+
+    <ImageView
+        android:id="@+id/lendingHistoryID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toTopOf="@+id/contactUsID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/libraryCatalogueID"
+        app:layout_constraintTop_toBottomOf="@+id/returnBookID"
+        app:srcCompat="@drawable/user_login_logo" />
+
+    <ImageView
+        android:id="@+id/libraryCatalogueID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintBottom_toTopOf="@+id/payID"
+        app:layout_constraintEnd_toStartOf="@+id/lendingHistoryID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lendBookID"
+        app:srcCompat="@drawable/user_login_logo" />
+
+    <ImageView
+        android:id="@+id/returnBookID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="137dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/lendingHistoryID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lendBookID"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user_login_logo" />
+
+    <TextView
+        android:id="@+id/userWelcomeID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/dela_gothic_one"
+        android:text="Welcome !!!"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/lendBookID"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="137dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/libraryCatalogueID"
+        app:layout_constraintEnd_toStartOf="@+id/returnBookID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user_login_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

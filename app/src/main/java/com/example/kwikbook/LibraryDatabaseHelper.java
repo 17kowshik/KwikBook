@@ -1,5 +1,6 @@
 package com.example.kwikbook;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -221,6 +222,26 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
                 cursor.close();
             }
         }
+    }
+
+    @SuppressLint("Range")
+    public String getName(SQLiteDatabase db, String username) {
+        Cursor cursor = null;
+        String name = null;
+
+        try {
+            cursor = db.query(TABLE_USERS, new String[]{COLUMN_NAME}, COLUMN_USERNAME + "=?",
+                    new String[]{username}, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return name;
     }
 }
 

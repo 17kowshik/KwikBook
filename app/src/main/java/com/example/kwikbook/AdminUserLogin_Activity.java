@@ -65,6 +65,7 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
                                 // Starting Intent to User's Home Page
                                 Toast.makeText(AdminUserLogin_Activity.this, "Successfully Logged In!, Welcome to KwikBook", Toast.LENGTH_SHORT).show();
                                 Intent loginToHome = new Intent(AdminUserLogin_Activity.this, UserHome_Activity.class);
+                                loginToHome.putExtra("USERNAME",userId);
                                 startActivity(loginToHome);
                             } else{
                                 Toast.makeText(AdminUserLogin_Activity.this, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
