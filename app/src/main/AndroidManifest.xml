@@ -13,6 +13,24 @@
         android:theme="@style/Theme.KwikBook"
         tools:targetApi="31">
         <activity
+            android:name=".ContactUs_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LendingHistory_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Pay_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ReturnBook_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LendBook_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LibraryCatalogue_Activity"
+            android:exported="false" />
+        <activity
             android:name=".penaltyInvoices_Activity"
             android:exported="false" />
         <activity
