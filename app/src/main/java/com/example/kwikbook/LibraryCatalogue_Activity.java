@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -65,29 +67,33 @@ public class LibraryCatalogue_Activity extends AppCompatActivity {
     private void showBookDetails(String bookName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Book Details");
-
-        // Fetch book details from the database based on bookName
         Book book = ldbHelper.getBookDetailsByName(db, bookName);
 
-        // Display book details in the AlertDialog message
         if (book != null) {
-            String availability = book.getAvailability() == 0 ? "AVAILABLE TO LEND" : "NOT AVAILABLE TO LEND";
-
-            String message = "BookID: " + book.getId() + "\n" +
-                    "Name: " + book.getName() + "\n" +
-                    "Author: " + book.getAuthor() + "\n" +
-                    "Year: " + book.getYear() + "\n" +
-                    "Synopsis: " + book.getSynopsis() + "\n" +
-                    "Availability: " + availability;
-
-            builder.setMessage(message);
+            String bookDetails = getBookDetails(book);
+            builder.setMessage(Html.fromHtml(bookDetails));
         } else {
             builder.setMessage("Book details not found.");
         }
 
-        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton("OK", (dialogInterface, i) -> {
+            et.setText("");
+            dialogInterface.dismiss();
+        });
 
         builder.create().show();
+    }
+
+    @NonNull
+    private static String getBookDetails(Book book) {
+        String availability = book.getAvailability() == 0 ? "AVAILABLE TO LEND" : "NOT AVAILABLE TO LEND";
+
+        return "<br>" + "<b>BookID:</b> " + book.getId() + "<br>" + "<br>" +
+                "<b>Name:</b> " + book.getName() + "<br>" + "<br>" +
+                "<b>Author:</b> " + book.getAuthor() + "<br>" + "<br>" +
+                "<b>Year:</b> " + book.getYear() + "<br>" + "<br>" +
+                "<b>Synopsis:</b> " + book.getSynopsis() + "<br>" + "<br>" +
+                "<b>Availability:</b> " + "<i>"+availability+"</i>";
     }
 
 
