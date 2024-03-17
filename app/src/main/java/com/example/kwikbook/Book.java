@@ -7,14 +7,16 @@ public class Book {
     private String author;
     private int year;
     private String synopsis;
+    private int availability;
 
     public Book() {}
 
-    public Book(String name, String author, int year, String synopsis) {
+    public Book(String name, String author, int year, String synopsis, int availability) {
         this.name = name;
         this.author = author;
         this.year = year;
         this.synopsis = synopsis;
+        this.availability = availability;
     }
 
     public long getId() {
@@ -55,5 +57,13 @@ public class Book {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public int getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
     }
 }

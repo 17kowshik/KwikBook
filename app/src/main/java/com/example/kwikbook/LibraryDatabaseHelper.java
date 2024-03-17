@@ -27,6 +27,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_AUTHOR = "author";
     private static final String COLUMN_YEAR = "year";
     private static final String COLUMN_SYNOPSIS = "synopsis";
+    private static final String COLUMN_AVAILABILITY = "availability";
 
     // Lending records table
     private static final String TABLE_LENDING_RECORDS = "lending_records";
@@ -34,6 +35,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_RECORD_ID = "user_id";
     private static final String COLUMN_BOOK_RECORD_ID = "book_id";
     private static final String COLUMN_LENDING_DATE = "lending_date";
+    private static final String COLUMN_EXPECTED_RETURN_DATE = "expected_return_date";
     private static final String COLUMN_RETURN_DATE = "return_date";
     private static final String COLUMN_FINE = "fine";
 
@@ -56,7 +58,8 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_BOOK_NAME + " TEXT, "
                 + COLUMN_AUTHOR + " TEXT, "
                 + COLUMN_YEAR + " INTEGER, "
-                + COLUMN_SYNOPSIS + " TEXT)";
+                + COLUMN_SYNOPSIS + " TEXT, "
+                + COLUMN_AVAILABILITY + " INTEGER DEFAULT 0)";
         db.execSQL(createBooksTableQuery);
 
         String createLendingRecordsTableQuery = "CREATE TABLE " + TABLE_LENDING_RECORDS + " ("
@@ -64,6 +67,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_USER_RECORD_ID + " INTEGER, "
                 + COLUMN_BOOK_RECORD_ID + " INTEGER, "
                 + COLUMN_LENDING_DATE + " TEXT, "
+                + COLUMN_EXPECTED_RETURN_DATE + " TEXT, "
                 + COLUMN_RETURN_DATE + " TEXT, "
                 + COLUMN_FINE + " REAL, "
                 + "FOREIGN KEY(" + COLUMN_USER_RECORD_ID + ") REFERENCES " + TABLE_USERS + "(" + COLUMN_USER_ID + "), "
@@ -120,6 +124,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_AUTHOR, book.getAuthor());
         cv.put(COLUMN_YEAR, book.getYear());
         cv.put(COLUMN_SYNOPSIS, book.getSynopsis());
+        cv.put(COLUMN_AVAILABILITY, book.getAvailability());
         db.insert(TABLE_BOOKS, null, cv);
     }
 
@@ -129,6 +134,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_AUTHOR, book.getAuthor());
         cv.put(COLUMN_YEAR, book.getYear());
         cv.put(COLUMN_SYNOPSIS, book.getSynopsis());
+        cv.put(COLUMN_AVAILABILITY, book.getAvailability());
         db.update(TABLE_BOOKS, cv, COLUMN_BOOK_ID + "=?", new String[]{String.valueOf(book.getId())});
 
     }
@@ -142,6 +148,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_USER_RECORD_ID, lendingRecord.getUserId());
         cv.put(COLUMN_BOOK_RECORD_ID, lendingRecord.getBookId());
         cv.put(COLUMN_LENDING_DATE, lendingRecord.getLendingDate());
+        cv.put(COLUMN_EXPECTED_RETURN_DATE, lendingRecord.getExpectedReturnDate());
         cv.put(COLUMN_RETURN_DATE, lendingRecord.getReturnDate());
         cv.put(COLUMN_FINE, lendingRecord.getFine());
         db.insert(TABLE_LENDING_RECORDS, null, cv);
@@ -153,6 +160,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_USER_RECORD_ID, lendingRecord.getUserId());
         cv.put(COLUMN_BOOK_RECORD_ID, lendingRecord.getBookId());
         cv.put(COLUMN_LENDING_DATE, lendingRecord.getLendingDate());
+        cv.put(COLUMN_EXPECTED_RETURN_DATE, lendingRecord.getExpectedReturnDate());
         cv.put(COLUMN_RETURN_DATE, lendingRecord.getReturnDate());
         cv.put(COLUMN_FINE, lendingRecord.getFine());
         db.update(TABLE_LENDING_RECORDS, cv, COLUMN_RECORD_ID + "=?", new String[]{String.valueOf(lendingRecord.getId())});

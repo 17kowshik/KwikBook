@@ -104,6 +104,10 @@ public class updateDB_Activity extends AppCompatActivity {
             synopsisEditText.setHint("Synopsis");
             layout.addView(synopsisEditText);
 
+            final EditText availabilityEditText = new EditText(updateDB_Activity.this);
+            availabilityEditText.setHint("Availability");
+            layout.addView(availabilityEditText);
+
             alertDialogBuilder.setView(layout);
 
             alertDialogBuilder.setPositiveButton("Add", (dialog, which) -> {
@@ -112,9 +116,10 @@ public class updateDB_Activity extends AppCompatActivity {
                 String author = authorEditText.getText().toString().trim();
                 int year = Integer.parseInt(yearEditText.getText().toString().trim());
                 String synopsis = synopsisEditText.getText().toString().trim();
+                int availability = Integer.parseInt(availabilityEditText.getText().toString().trim());
                 SQLiteDatabase db = ldbHelper.getWritableDatabase();
-                if (!bookname.isEmpty() && !author.isEmpty() && !String.valueOf(year).isEmpty() && !synopsis.isEmpty()) {
-                    Book newBook = new Book(bookname,author,year,synopsis);
+                if (!bookname.isEmpty() && !author.isEmpty() && !String.valueOf(year).isEmpty() && !synopsis.isEmpty() &&  !String.valueOf(availability).isEmpty()) {
+                    Book newBook = new Book(bookname,author,year,synopsis,availability);
                     ldbHelper.addBook(db,newBook);
                     Toast.makeText(updateDB_Activity.this, "Added Successfully", Toast.LENGTH_SHORT).show();
                 } else {

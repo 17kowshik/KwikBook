@@ -28,52 +28,34 @@ public class UserHome_Activity extends AppCompatActivity {
         lendingHistory = findViewById(R.id.lendingHistory_iv);
         contactUs = findViewById(R.id.contactUs_iv);
 
-        libraryCatalogue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(UserHome_Activity.this, LibraryCatalogue_Activity.class);
-                startActivity(i);
-            }
+        libraryCatalogue.setOnClickListener(view -> {
+            Intent i = new Intent(UserHome_Activity.this, LibraryCatalogue_Activity.class);
+            startActivity(i);
         });
 
-        lendBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(UserHome_Activity.this, LendBook_Activity.class);
-                startActivity(i);
-            }
+        lendBook.setOnClickListener(view -> {
+            Intent i = new Intent(UserHome_Activity.this, LendBook_Activity.class);
+            startActivity(i);
         });
 
-        returnBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(UserHome_Activity.this, ReturnBook_Activity.class);
-                startActivity(i);
-            }
+        returnBook.setOnClickListener(view -> {
+            Intent i = new Intent(UserHome_Activity.this, ReturnBook_Activity.class);
+            startActivity(i);
         });
 
-        pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(UserHome_Activity.this, Pay_Activity.class);
-                startActivity(i);
-            }
+        pay.setOnClickListener(view -> {
+            Intent i = new Intent(UserHome_Activity.this, Pay_Activity.class);
+            startActivity(i);
         });
 
-        lendingHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(UserHome_Activity.this, LendingHistory_Activity.class);
-                startActivity(i);
-            }
+        lendingHistory.setOnClickListener(view -> {
+            Intent i = new Intent(UserHome_Activity.this, LendingHistory_Activity.class);
+            startActivity(i);
         });
 
-        contactUs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(UserHome_Activity.this, ContactUs_Activity.class);
-                startActivity(i);
-            }
+        contactUs.setOnClickListener(view -> {
+            Intent i = new Intent(UserHome_Activity.this, ContactUs_Activity.class);
+            startActivity(i);
         });
 
         Intent receivingIntent = getIntent();

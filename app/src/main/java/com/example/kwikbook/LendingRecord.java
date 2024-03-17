@@ -6,15 +6,17 @@ public class LendingRecord {
     private long userId;
     private long bookId;
     private String lendingDate;
+    private String expectedReturnDate;
     private String returnDate;
     private double fine;
 
     public LendingRecord() {}
 
-    public LendingRecord(long userId, long bookId, String lendingDate, String returnDate, double fine) {
+    public LendingRecord(long userId, long bookId, String lendingDate, String expectedReturnDate, String returnDate, double fine) {
         this.userId = userId;
         this.bookId = bookId;
         this.lendingDate = lendingDate;
+        this.expectedReturnDate = expectedReturnDate;
         this.returnDate = returnDate;
         this.fine = fine;
     }
@@ -63,6 +65,14 @@ public class LendingRecord {
 
     public void setFine(double fine) {
         this.fine = fine;
+    }
+
+    public String getExpectedReturnDate() {
+        return expectedReturnDate;
+    }
+
+    public void setExpectedReturnDate(String expectedReturnDate) {
+        this.expectedReturnDate = expectedReturnDate;
     }
 }
 
