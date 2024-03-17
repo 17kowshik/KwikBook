@@ -3,15 +3,11 @@ package com.example.kwikbook;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class LendBook_Activity extends AppCompatActivity {
     EditText e;
@@ -31,7 +27,11 @@ public class LendBook_Activity extends AppCompatActivity {
         b.setOnClickListener(view -> {
             LibraryDatabaseHelper ldbHelper=new LibraryDatabaseHelper(this);
             SQLiteDatabase db= ldbHelper.getWritableDatabase();
-            int userID=ldbHelper.getUsserID(db, username);
+            int userID=ldbHelper.getUserID(db, username);
+            long bookID = Long.parseLong(e.getText().toString());
+            if (ldbHelper.isAvailable(db, LendBook_Activity.this, bookID)){
+
+            }
         });
 
     }
