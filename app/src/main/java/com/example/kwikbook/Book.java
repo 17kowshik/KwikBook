@@ -19,6 +19,15 @@ public class Book {
         this.availability = availability;
     }
 
+    public Book(int id, String name, String author, int year, String synopsis, int availability) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.year = year;
+        this.synopsis = synopsis;
+        this.availability = availability;
+    }
+
     public long getId() {
         return id;
     }

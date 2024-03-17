@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "library_database";
     private static final int DATABASE_VERSION = 1;
@@ -375,6 +377,57 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
         return bookName;
+    }
+
+    public ArrayList<String> getBookSuggestions(SQLiteDatabase db, String query) {
+        ArrayList<String> suggestions = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery("SELECT " + COLUMN_BOOK_NAME + " FROM " + TABLE_BOOKS + " WHERE " + COLUMN_BOOK_NAME + " LIKE '%" + query + "%'", null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    @SuppressLint("Range") String bookName = cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_NAME));
+                    suggestions.add(bookName);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return suggestions;
+    }
+
+    public Book getBookDetailsByName(SQLiteDatabase db, String bookName) {
+        Cursor cursor = null;
+        Book book = null;
+
+        try {
+            cursor = db.query(TABLE_BOOKS, null, COLUMN_BOOK_NAME + " = ?", new String[]{bookName},
+                    null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                // Retrieve book details from the cursor
+                @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(COLUMN_BOOK_ID));
+                @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_NAME));
+                @SuppressLint("Range") String author = cursor.getString(cursor.getColumnIndex(COLUMN_AUTHOR));
+                @SuppressLint("Range") int year = cursor.getInt(cursor.getColumnIndex(COLUMN_YEAR));
+                @SuppressLint("Range") String synopsis = cursor.getString(cursor.getColumnIndex(COLUMN_SYNOPSIS));
+                @SuppressLint("Range") int availability = cursor.getInt(cursor.getColumnIndex(COLUMN_AVAILABILITY));
+
+                book = new Book(id, name, author, year, synopsis, availability);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return book;
     }
 }
 
