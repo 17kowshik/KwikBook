@@ -28,6 +28,14 @@ public class UserHome_Activity extends AppCompatActivity {
         lendingHistory = findViewById(R.id.lendingHistory_iv);
         contactUs = findViewById(R.id.contactUs_iv);
 
+        Intent receivingIntent = getIntent();
+        String username = receivingIntent.getStringExtra("USERNAME");
+
+        LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(this);
+        SQLiteDatabase db = ldbHelper.getReadableDatabase();
+        String welcomeText = "Welcome "+ldbHelper.getName(db,username)+" !!!";
+        welcomeTextView.setText(welcomeText);
+
         libraryCatalogue.setOnClickListener(view -> {
             Intent i = new Intent(UserHome_Activity.this, LibraryCatalogue_Activity.class);
             startActivity(i);
@@ -35,6 +43,7 @@ public class UserHome_Activity extends AppCompatActivity {
 
         lendBook.setOnClickListener(view -> {
             Intent i = new Intent(UserHome_Activity.this, LendBook_Activity.class);
+            i.putExtra("USERNAME", username);
             startActivity(i);
         });
 
@@ -58,12 +67,6 @@ public class UserHome_Activity extends AppCompatActivity {
             startActivity(i);
         });
 
-        Intent receivingIntent = getIntent();
-        String username = receivingIntent.getStringExtra("USERNAME");
 
-        LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(this);
-        SQLiteDatabase db = ldbHelper.getReadableDatabase();
-        String welcomeText = "Welcome "+ldbHelper.getName(db,username)+" !!!";
-        welcomeTextView.setText(welcomeText);
     }
 }

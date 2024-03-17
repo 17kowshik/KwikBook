@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "library_database";
@@ -172,10 +173,50 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_LENDING_RECORDS, COLUMN_RECORD_ID + "=?", new String[]{String.valueOf(recordId)});
     }
 
-    public void lendBook(long userId, long bookId, String lendingDate, String returnDate) {
-        //
-    }
+    public void lendBook(SQLiteDatabase db, Context context, long userId, long bookId, String lendingDate, String expectedReturnDate) {
+        Cursor cursor = null;
+        try {
+            // Check if the book is available for lending
+            cursor = db.query(TABLE_BOOKS, new String[]{COLUMN_AVAILABILITY}, COLUMN_BOOK_ID + "=?",
+                    new String[]{String.valueOf(bookId)}, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                @SuppressLint("Range") int availability = cursor.getInt(cursor.getColumnIndex(COLUMN_AVAILABILITY));
+                if (availability == 0) { // Book is available
+                    // Proceed with lending
+                    ContentValues cv = new ContentValues();
+                    cv.put(COLUMN_USER_RECORD_ID, userId);
+                    cv.put(COLUMN_BOOK_RECORD_ID, bookId);
+                    cv.put(COLUMN_LENDING_DATE, lendingDate);
+                    cv.put(COLUMN_EXPECTED_RETURN_DATE, expectedReturnDate);
+                    cv.put(COLUMN_RETURN_DATE, ""); // Initially empty, indicating not returned yet
+                    cv.put(COLUMN_FINE, 0); // Initially no fine
 
+                    // Insert lending record
+                    long recordId = db.insert(TABLE_LENDING_RECORDS, null, cv);
+
+                    // Update book availability
+                    ContentValues bookCV = new ContentValues();
+                    bookCV.put(COLUMN_AVAILABILITY, 1); // Set availability to not available
+                    db.update(TABLE_BOOKS, bookCV, COLUMN_BOOK_ID + "=?", new String[]{String.valueOf(bookId)});
+                } else {
+                    // Book is not available
+                    Toast.makeText(context, "Book is not available for lending", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                // Book not found
+                Toast.makeText(context, "Book not found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            // Error lending book
+            Toast.makeText(context, "Error lending book: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        } finally {
+            // Close the cursor and database
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+    }
     // Method for returning a book
     public void returnBook(SQLiteDatabase db, long recordId, String returnDate) {
         ContentValues cv = new ContentValues();
@@ -251,5 +292,25 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         }
         return name;
     }
+    @SuppressLint("Range")
+    public int getUsserID(SQLiteDatabase db, String username) {
+        Cursor cursor = null;
+        int id = -1;
+
+        try {
+            cursor = db.query(TABLE_USERS, new String[]{COLUMN_USER_ID}, COLUMN_USERNAME + "=?",
+                    new String[]{username}, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+        return id;
+    }
+
 }
 
