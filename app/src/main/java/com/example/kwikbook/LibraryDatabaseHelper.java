@@ -77,6 +77,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
 
         addAdmin(db);
         addInitialUser(db);
+        addSampleBooks(db);
     }
 
     @Override
@@ -94,6 +95,39 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private void addAdmin(SQLiteDatabase db){
         User admin = new User("admin", "adminAccess", "Administrator", "999999999");
         addUser(db, admin);
+    }
+
+    public void addSampleBooks(SQLiteDatabase db) {
+        addBook(db, new Book("Introduction to Algorithms", "Thomas H. Cormen et al.", 2009, "A comprehensive guide to algorithms and their analysis, covering fundamental techniques for solving problems efficiently.",0));
+        addBook(db, new Book("Clean Code: A Handbook of Agile Software Craftsmanship", "Robert C. Martin", 2008, "This book offers guidelines for writing clean, maintainable code, focusing on principles and practices for improving software quality.", 0));
+        addBook(db, new Book("Design Patterns: Elements of Reusable Object-Oriented Software", "Erich Gamma et al.", 1994, "Illustrates classic design patterns in software engineering, providing solutions to common problems in object-oriented design.",0));
+        addBook(db, new Book("Operating System Concepts", "Abraham Silberschatz et al.", 2018, "An essential text for understanding operating system principles, covering processes, memory management, file systems, and more.",0));
+        addBook(db, new Book("Computer Networking: A Top-Down Approach", "James F. Kurose et al.", 2017, "Introduces networking concepts from a top-down perspective, emphasizing applications, protocols, and the Internet's architecture.",0));
+        addBook(db, new Book("Artificial Intelligence: A Modern Approach", "Stuart Russell, Peter Norvig", 2020, "A comprehensive introduction to AI, exploring intelligent agents, search algorithms, machine learning, and natural language processing.",0));
+        addBook(db, new Book("Database System Concepts", "Abraham Silberschatz et al.", 2020, "Covers fundamental concepts of database systems, including relational models, query processing, and transaction management.",0));
+        addBook(db, new Book("Introduction to the Theory of Computation", "Michael Sipser", 2012, "Explores the theory of computation, formal languages, automata theory, and computational complexity, essential for understanding computation's limits.",0));
+        addBook(db, new Book("Computer Organization and Design: The Hardware/Software Interface", "David A. Patterson, John L. Hennessy", 2017, "Examines computer architecture and organization, focusing on the relationship between hardware and software for efficient system design.",0));
+        addBook(db, new Book("The Pragmatic Programmer: Your Journey to Mastery", "Andrew Hunt, David Thomas", 2019, "Provides practical advice for software developers, offering tips on productivity, teamwork, and continuous improvement in software development.",0));
+        addBook(db, new Book("Microelectronic Circuits", "Adel S. Sedra, Kenneth C. Smith", 2014, "A foundational text on microelectronics, covering semiconductor devices, integrated circuits, and analog/digital circuit analysis and design.",0));
+        addBook(db, new Book("Signals and Systems", "Alan V. Oppenheim, Alan S. Willsky", 1996, "Presents principles of signals and systems, including time and frequency domain analysis, Fourier transforms, and system properties, essential for ECE students.",0));
+        addBook(db, new Book("Control Systems Engineering", "Norman S. Nise", 2021, "An introductory guide to control systems theory and applications, covering feedback control, system modeling, and stability analysis for ECE and MECH students.",0));
+        addBook(db, new Book("Fundamentals of Heat and Mass Transfer", "Theodore L. Bergman et al.", 2011, "Covers principles of heat and mass transfer, including conduction, convection, and radiation, crucial for understanding thermal systems in MECH.",0));
+        addBook(db, new Book("Mechanics of Materials", "Russell C. Hibbeler", 2018, "Discusses mechanics of deformable bodies, stress and strain analysis, and structural mechanics, indispensable for designing and analyzing mechanical components.",0));
+        addBook(db, new Book("The Catcher in the Rye", "J.D. Salinger", 1951, "A classic novel following the adolescent struggles of Holden Caulfield, exploring themes of identity, alienation, and the transition to adulthood.",0));
+        addBook(db, new Book("To Kill a Mockingbird", "Harper Lee", 1960, "Set in the American South, this novel addresses racial injustice and moral growth through the eyes of young Scout Finch, with timeless lessons on empathy and courage.",0));
+        addBook(db, new Book("Pride and Prejudice", "Jane Austen", 1813, "A witty and romantic novel depicting societal norms and relationships in 19th-century England, focusing on the independent-minded Elizabeth Bennet and the enigmatic Mr. Darcy.",0));
+        addBook(db, new Book("1984", "George Orwell", 1949, "A dystopian masterpiece exploring surveillance, propaganda, and totalitarianism in a future society ruled by the oppressive Party, with themes of resistance and individual freedom.",0));
+        addBook(db, new Book("Brave New World", "Aldous Huxley", 1932, "Set in a technologically advanced but morally bankrupt world, this novel contrasts individualism with societal conformity, raising questions about the cost of progress and happiness.",0));
+        addBook(db, new Book("Cracking the Coding Interview", "Gayle Laakmann McDowell", 2019, "A comprehensive guide to technical interviews, covering algorithms, data structures, system design, and problem-solving strategies commonly asked in software engineering interviews.",0));
+        addBook(db, new Book("Elements of Programming Interviews in Java", "Adnan Aziz et al.", 2016, "Presents a collection of coding problems and solutions, focusing on algorithmic thinking and Java programming techniques for software engineering interview preparation.",0));
+        addBook(db, new Book("Programming Interviews Exposed", "John Mongan et al.", 2018, "Provides insights into the software engineering interview process, featuring coding questions, problem-solving strategies, and tips for succeeding in technical interviews.",0));
+        addBook(db, new Book("Crack the System Design Interview", "Tushar Roy", 2020, "Guides readers through the system design interview process, covering scalability, availability, and design patterns commonly discussed in software engineering interviews.",0));
+        addBook(db, new Book("Dynamic Programming for Coding Interviews", "Meenakshi", 2018, "Focuses on dynamic programming techniques, algorithms, and problem-solving strategies tailored for coding interviews, helping candidates master this critical aspect of technical interviews.",0));
+        addBook(db, new Book("Introduction to Psychology", "James W. Kalat", 2019, "Covers the fundamentals of psychology, including biological bases of behavior, cognition, and social interactions, providing insights into human behavior.", 0));
+        addBook(db, new Book("Principles of Economics", "N. Gregory Mankiw", 2020, "An introductory text on economics, exploring principles of microeconomics and macroeconomics, markets, and government policies.", 0));
+        addBook(db, new Book("Fundamentals of Biology", "Lisa A. Urry et al.", 2016, "Introduces key concepts in biology, including cell structure, genetics, evolution, and ecology, offering a foundation for understanding living organisms.", 0));
+        addBook(db, new Book("Principles of Marketing", "Philip T. Kotler et al.", 2017, "Covers principles and practices of marketing, including market research, consumer behavior, branding, and marketing strategies for businesses.", 0));
+        addBook(db, new Book("World History: Patterns of Interaction", "Roger B. Beck et al.", 2018, "Explores global history from ancient civilizations to the present day, examining cultural, political, and economic developments worldwide.", 0));
     }
 
     public void addUser(SQLiteDatabase db, User user) {
