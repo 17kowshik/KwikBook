@@ -210,7 +210,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
 
     public void lendBook(SQLiteDatabase db, Context context, long userId, long bookId, String lendingDate, String expectedReturnDate) {
         try {
-            if (isAvailable(db, context, bookId)) { // Check if the book is available
+            if (getAvailability(db,bookId) == 0) { // Check if the book is available
                 // Proceed with lending
                 ContentValues cv = new ContentValues();
                 cv.put(COLUMN_USER_RECORD_ID, userId);
@@ -231,38 +231,40 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             // Error lending book
             Toast.makeText(context, "Error lending book: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        } finally {
-            db.close();
         }
     }
 
     // Method to check if a book is available
-    public boolean isAvailable(SQLiteDatabase db, Context context, long bookId) {
+    // Method to check if a book is available
+    public boolean isAvailable(Context context, long bookId) {
+        SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = null;
+        boolean isBookAvailable = false;
         try {
-            // Check if the book is available for lending
+            // Query the database to check the availability of the book
             cursor = db.query(TABLE_BOOKS, new String[]{COLUMN_AVAILABILITY}, COLUMN_BOOK_ID + "=?",
                     new String[]{String.valueOf(bookId)}, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
+                // Retrieve the availability status
                 @SuppressLint("Range") int availability = cursor.getInt(cursor.getColumnIndex(COLUMN_AVAILABILITY));
-                if (availability == 0) {
-                    return true; // Book is available
-                } else {
-                    // Book is not available
-                    Toast.makeText(context, "Book is not available for lending", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
+                // Check if the book is available
+                isBookAvailable = (availability == 0);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            // Handle any exceptions or errors
+            Toast.makeText(context, "Error checking book availability: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
+            // Close the cursor
             if (cursor != null) {
                 cursor.close();
             }
         }
-        // Default to false in case of any exception or if book not found
-        return false;
+        // Return the availability status
+        return isBookAvailable;
     }
+
+
 
     // Method for returning a book
     public void returnBook(SQLiteDatabase db, long recordId, String returnDate) {
@@ -331,53 +333,48 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
             if (cursor != null && cursor.moveToFirst()) {
                 name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
             }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.close();
+        } catch(Exception e){
+
         }
         return name;
     }
     @SuppressLint("Range")
     public int getUserID(SQLiteDatabase db, String username) {
         Cursor cursor = null;
-        int id = -1;
+        int id = 0;
 
         try {
             cursor = db.query(TABLE_USERS, new String[]{COLUMN_USER_ID}, COLUMN_USERNAME + "=?",
                     new String[]{username}, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_NAME)));
+                id = cursor.getInt(cursor.getColumnIndex(COLUMN_USER_ID));
             }
         } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            db.close();
+
         }
         return id;
     }
 
+
     @SuppressLint("Range")
-    public String getBookName(SQLiteDatabase db, long bookID) {
+    public String getBookName(SQLiteDatabase db, int bookID) {
         Cursor cursor = null;
         String bookName = null;
 
         try {
             cursor = db.query(TABLE_BOOKS, new String[]{COLUMN_BOOK_NAME}, COLUMN_BOOK_ID + "=?",
                     new String[]{String.valueOf(bookID)}, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                bookName = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+            if (cursor!= null && cursor.moveToFirst()) {
+                bookName = cursor.getString(cursor.getColumnIndex(COLUMN_BOOK_NAME));
             }
         } finally {
-            if (cursor != null) {
+            if (cursor!= null) {
                 cursor.close();
             }
-            db.close();
         }
         return bookName;
     }
+
 
     public ArrayList<String> getBookSuggestions(SQLiteDatabase db, String query) {
         ArrayList<String> suggestions = new ArrayList<>();
@@ -429,5 +426,32 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
 
         return book;
     }
+
+    // Method to get the availability status of a book
+    @SuppressLint("Range")
+    public int getAvailability(SQLiteDatabase db, long bookId) {
+        Cursor cursor = null;
+        int availability = 0; // Default value indicating error or unknown status
+        try {
+            // Query the database to retrieve the availability status of the book
+            cursor = db.query(TABLE_BOOKS, new String[]{COLUMN_AVAILABILITY}, COLUMN_BOOK_ID + "=?",
+                    new String[]{String.valueOf(bookId)}, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                // Retrieve the availability status
+                availability = cursor.getInt(cursor.getColumnIndex(COLUMN_AVAILABILITY));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle the exception (optional)
+        } finally {
+            // Close the cursor
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        // Return the availability status
+        return availability;
+    }
+
 }
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -19,26 +20,31 @@ import java.util.Date;
 public class LendBook_Activity extends AppCompatActivity {
     EditText e;
     Button b;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_lend_book);
 
-        e=findViewById(R.id.editTextText);
-        b=findViewById(R.id.button);
+        e = findViewById(R.id.editTextText);
+        b = findViewById(R.id.button);
 
         Intent receivingIntent = getIntent();
         String username = receivingIntent.getStringExtra("USERNAME");
 
         b.setOnClickListener(view -> {
-            LibraryDatabaseHelper ldbHelper=new LibraryDatabaseHelper(this);
-            SQLiteDatabase db= ldbHelper.getWritableDatabase();
-            int userID=ldbHelper.getUserID(db, username);
-            long bookID = Long.parseLong(e.getText().toString());
-            if (ldbHelper.isAvailable(db, LendBook_Activity.this, bookID)){
+            LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(this);
+            SQLiteDatabase db = ldbHelper.getWritableDatabase();
+            int userID = ldbHelper.getUserID(db, username);
+            int bookID = Integer.parseInt(e.getText().toString());
+
+            int availability = ldbHelper.getAvailability(db, bookID);
+
+            if (availability == 0) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LendBook_Activity.this);
                 alertDialogBuilder.setTitle("Confirm Book Lending");
+
                 Date today = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String formattedDate = dateFormat.format(today);
@@ -48,7 +54,7 @@ public class LendBook_Activity extends AppCompatActivity {
                 String thirtyDaysFromNow = dateFormat30.format(calendar.getTime());
 
                 String lendingDetails = "<br>" +
-                        "<b>The Book you want to lend is :</b> " + ldbHelper.getBookName(db,bookID) + "<br>" +
+                        "<b>The Book you want to lend is :</b> " + ldbHelper.getBookName(db, bookID) + "<br>" +
                         "<br>" +
                         "<b>Lending Date :</b> " + "<i>" + formattedDate + "</i>" + "<br>" +
                         "<br>" +
@@ -59,10 +65,27 @@ public class LendBook_Activity extends AppCompatActivity {
                 alertDialogBuilder.setMessage(Html.fromHtml(lendingDetails));
 
                 alertDialogBuilder.setPositiveButton("CONFIRM LENDING", (dialogInterface, i) -> {
-                    ldbHelper.lendBook(db,LendBook_Activity.this,userID,bookID,formattedDate,thirtyDaysFromNow);
+                    ldbHelper.lendBook(db, LendBook_Activity.this, userID, bookID, formattedDate, thirtyDaysFromNow);
+                    Toast.makeText(this, "Lent Successfully !!!", Toast.LENGTH_SHORT).show();
                 });
+
+                alertDialogBuilder.setNegativeButton("CANCEL", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            } else {
+                Toast.makeText(this, "Sorry, Book isn't Available to lend 😢", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LibraryDatabaseHelper dbHelper = new LibraryDatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.close();
     }
 }
