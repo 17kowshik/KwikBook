@@ -54,6 +54,7 @@ public class UserHome_Activity extends AppCompatActivity {
 
         pay.setOnClickListener(view -> {
             Intent i = new Intent(UserHome_Activity.this, Pay_Activity.class);
+            i.putExtra("USERNAME", username);
             startActivity(i);
         });
 

@@ -54,7 +54,7 @@ public class LendBook_Activity extends AppCompatActivity {
                 String thirtyDaysFromNow = dateFormat30.format(calendar.getTime());
 
                 String lendingDetails = "<br>" +
-                        "<b>The Book you want to lend is :</b> " + ldbHelper.getBookName(db, bookID) + "<br>" +
+                        "<b>Book you are lending :</b> " + ldbHelper.getBookName(db, bookID) + "<br>" +
                         "<br>" +
                         "<b>Lending Date :</b> " + "<i>" + formattedDate + "</i>" + "<br>" +
                         "<br>" +

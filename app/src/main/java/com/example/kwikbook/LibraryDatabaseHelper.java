@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "library_database";
@@ -80,6 +81,7 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         addAdmin(db);
         addInitialUser(db);
         addSampleBooks(db);
+        addSampleLendingRecords(db,2);
     }
 
     @Override
@@ -98,7 +100,13 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         User admin = new User("admin", "adminAccess", "Administrator", "999999999");
         addUser(db, admin);
     }
-
+    private void addSampleLendingRecords(SQLiteDatabase db, long userId) {
+        addLendingRecord(db, new LendingRecord(userId, 1, "2023-01-01", "2023-02-01", "", 65));
+        addLendingRecord(db, new LendingRecord(userId, 2, "2023-02-01", "2023-03-01", "", 75));
+        addLendingRecord(db, new LendingRecord(userId, 3, "2023-03-01", "2023-04-01", "2023-04-10", 10));
+        addLendingRecord(db, new LendingRecord(userId, 4, "2023-04-01", "2023-05-01", "2023-05-05", 5));
+        addLendingRecord(db, new LendingRecord(userId, 5, "2023-05-01", "2023-06-01", "", 20));
+    }
     public void addSampleBooks(SQLiteDatabase db) {
         addBook(db, new Book("Introduction to Algorithms", "Thomas H. Cormen et al.", 2009, "A comprehensive guide to algorithms and their analysis, covering fundamental techniques for solving problems efficiently.",0));
         addBook(db, new Book("Clean Code: A Handbook of Agile Software Craftsmanship", "Robert C. Martin", 2008, "This book offers guidelines for writing clean, maintainable code, focusing on principles and practices for improving software quality.", 0));
@@ -452,6 +460,37 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         // Return the availability status
         return availability;
     }
+    public List<LendingRecord> getLendingRecordsWithFinesGreaterThanZero(long userId) {
+        List<LendingRecord> lendingRecords = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
 
+        try {
+            String query = "SELECT * FROM " + TABLE_LENDING_RECORDS +
+                    " WHERE " + COLUMN_USER_RECORD_ID + " = ?" +
+                    " AND " + COLUMN_FINE + " > 0"
+                    ;
+            cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    long bookId = cursor.getLong(cursor.getColumnIndex(COLUMN_BOOK_RECORD_ID));
+                    String lendingDate = cursor.getString(cursor.getColumnIndex(COLUMN_LENDING_DATE));
+                    String expectedReturnDate = cursor.getString(cursor.getColumnIndex(COLUMN_EXPECTED_RETURN_DATE));
+                    String returnDate = cursor.getString(cursor.getColumnIndex(COLUMN_RETURN_DATE));
+                    double fine = cursor.getDouble(cursor.getColumnIndex(COLUMN_FINE));
+
+                    // Create a new lending record object and add it to the list
+                    lendingRecords.add(new LendingRecord(userId, bookId, lendingDate, expectedReturnDate, returnDate, fine));
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return lendingRecords;
+    }
 }
 
