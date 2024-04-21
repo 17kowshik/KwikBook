@@ -31,11 +31,6 @@ public class Pay_Activity extends AppCompatActivity {
     int userID;
     String username;
     List<LendingRecord> lendingRecords;
-    Map<Integer, Boolean> paidStatusMap; // Map to track paid status
-
-    // SharedPreferences and Editor for saving and retrieving paid status
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +39,6 @@ public class Pay_Activity extends AppCompatActivity {
 
         // Initialize database helper and SharedPreferences
         ldbHelper = new LibraryDatabaseHelper(this);
-        sharedPreferences = getSharedPreferences("PaidStatusPrefs", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
         Intent receivingIntent = getIntent();
         username = receivingIntent.getStringExtra("USERNAME");
         SQLiteDatabase db = ldbHelper.getWritableDatabase();
@@ -54,9 +46,6 @@ public class Pay_Activity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_fines);
         displayLendingRecordsWithFines();
-
-        // Initialize the paid status map
-        paidStatusMap = new HashMap<>();
     }
 
     private void displayLendingRecordsWithFines() {
@@ -110,12 +99,8 @@ public class Pay_Activity extends AppCompatActivity {
             lendingDateTextView.setText("Lending Date: " + lendingRecord.getLendingDate());
             returnDateTextView.setText("Return Date: " + lendingRecord.getReturnDate());
             fineAmountTextView.setText("Fine Amount: " + lendingRecord.getFine());
-
-            // Retrieve the paid status from SharedPreferences
-            boolean isFinePaid = sharedPreferences.getBoolean("isFinePaid_" + position, false);
-
-            // Update button text and color based on the paid status
-            if (isFinePaid) {
+            int isFinePaid = lendingRecord.getFee_paid();
+            if (isFinePaid == 0) {
                 payFineButton.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
                 payFineButton.setText("PAID");
                 payFineButton.setEnabled(false);
@@ -125,9 +110,7 @@ public class Pay_Activity extends AppCompatActivity {
                 payFineButton.setEnabled(true);
             }
 
-            // Set the click listener for the "Pay Fine" button
             payFineButton.setOnClickListener(v -> {
-                // Get current date and time
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                 SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
                 Date currentDate = new Date();
@@ -136,41 +119,32 @@ public class Pay_Activity extends AppCompatActivity {
                 String payingTime = timeFormat.format(currentDate);
 
                 // Create the payment details in HTML format
-                StringBuilder paymentDetails = new StringBuilder();
-                paymentDetails.append("<b>User Name:</b> ")
-                        .append(ldbHelper.getName(db, username))
-                        .append("<br>")
-                        .append("<b>Book Name:</b> ")
-                        .append(ldbHelper.getBookName(db, (int) lendingRecord.getBookId()))
-                        .append("<br>")
-                        .append("<b>Lending Date:</b> ")
-                        .append(lendingRecord.getLendingDate())
-                        .append("<br>")
-                        .append("<b>Return Date:</b> ")
-                        .append(lendingRecord.getReturnDate())
-                        .append("<br>")
-                        .append("<b>Fine Paid:</b> ")
-                        .append(lendingRecord.getFine())
-                        .append("<br>")
-                        .append("<b>Paying Date:</b>")
-                        .append(payingDate)
-                        .append("<br>")
-                        .append("<b>Paying Time:</b>")
-                        .append(payingTime);
+                String paymentDetails = "<b>User Name:</b> " +
+                        ldbHelper.getName(db, username) +
+                        "<br>" +
+                        "<b>Book Name:</b> " +
+                        ldbHelper.getBookName(db, (int) lendingRecord.getBookId()) +
+                        "<br>" +
+                        "<b>Lending Date:</b> " +
+                        lendingRecord.getLendingDate() +
+                        "<br>" +
+                        "<b>Return Date:</b> " +
+                        lendingRecord.getReturnDate() +
+                        "<br>" +
+                        "<b>Fine Paid:</b> " +
+                        lendingRecord.getFine() +
+                        "<br>" +
+                        "<b>Paying Date:</b>" +
+                        payingDate +
+                        "<br>" +
+                        "<b>Paying Time:</b>" +
+                        payingTime;
 
-                // Show an alert dialog with the payment details
                 AlertDialog.Builder builder = new AlertDialog.Builder(Pay_Activity.this);
                 builder.setTitle("BILL")
-                        .setMessage(Html.fromHtml(paymentDetails.toString(), Html.FROM_HTML_MODE_COMPACT))
+                        .setMessage(Html.fromHtml(paymentDetails, Html.FROM_HTML_MODE_COMPACT))
                         .setPositiveButton("Paid", (dialog, which) -> {
-                            // Update the paid status map
-                            paidStatusMap.put(position, true);
-
-                            // Save the paid status to SharedPreferences
-                            editor.putBoolean("isFinePaid_" + position, true);
-                            editor.apply();
-
-                            // Update the button state
+                            ldbHelper.feePaidUpdate(db, lendingRecord.getUserId(),lendingRecord.getBookId());
                             payFineButton.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
                             payFineButton.setText("PAID");
                             payFineButton.setEnabled(false);

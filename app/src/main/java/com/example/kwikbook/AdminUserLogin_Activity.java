@@ -21,6 +21,7 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
     EditText login_et, pass_et;
     Button login_but;
     int flag;
+    LibraryDatabaseHelper ldbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,9 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
         login_et = findViewById(R.id.login_id_et);
         pass_et = findViewById(R.id.password_et);
         login_but = findViewById(R.id.login_button);
+        ldbHelper = new LibraryDatabaseHelper(this);
+        SQLiteDatabase db = ldbHelper.getWritableDatabase();
+        ldbHelper.generateFine(db);
 
         LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(AdminUserLogin_Activity.this);
         userLogo.setOnClickListener(new View.OnClickListener() {

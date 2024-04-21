@@ -49,6 +49,7 @@ public class UserHome_Activity extends AppCompatActivity {
 
         returnBook.setOnClickListener(view -> {
             Intent i = new Intent(UserHome_Activity.this, ReturnBook_Activity.class);
+            i.putExtra("USERNAME", username);
             startActivity(i);
         });
 
@@ -60,6 +61,7 @@ public class UserHome_Activity extends AppCompatActivity {
 
         lendingHistory.setOnClickListener(view -> {
             Intent i = new Intent(UserHome_Activity.this, LendingHistory_Activity.class);
+            i.putExtra("USERNAME", username);
             startActivity(i);
         });
 

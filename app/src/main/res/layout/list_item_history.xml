@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/history_text_book_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/history_text_lending_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/history_text_book_name"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/history_text_return_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/history_text_lending_date"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/history_text_fine_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/history_text_return_date"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/history_text_fine_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/history_text_fine_amount"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp" />
+
+</RelativeLayout>

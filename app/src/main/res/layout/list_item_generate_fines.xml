@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textViewBookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewUserName"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewLendingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewBookName"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewExpectedReturnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLendingDate"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewFine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewExpectedReturnDate"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp" />
+
+</RelativeLayout>
