@@ -243,10 +243,10 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Method for returning a book
-    public void returnBook(SQLiteDatabase db, long recordId, String returnDate) {
+    public void returnBook(SQLiteDatabase db, long userId, long bookId, String returnDate) {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_RETURN_DATE, returnDate);
-        db.update(TABLE_LENDING_RECORDS, cv, COLUMN_RECORD_ID + "=?", new String[]{String.valueOf(recordId)});
+        db.update(TABLE_LENDING_RECORDS, cv, COLUMN_BOOK_ID + "=? AND " + COLUMN_USER_ID + "=?", new String[]{String.valueOf(bookId), String.valueOf(userId)});
     }
 
     public void feePaidUpdate(SQLiteDatabase db, long bookId, long userId) {
@@ -570,6 +570,39 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
         }
         return lendingRecords;
     }
+
+    public List<LendingRecord> getLendingRecordsWithEmptyReturnDate(long userId) {
+        List<LendingRecord> lendingRecords = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT * FROM " + TABLE_LENDING_RECORDS +
+                    " WHERE " + COLUMN_USER_RECORD_ID + " = ? " +
+                    " AND " + COLUMN_RETURN_DATE + " = '' " + // Select records where return date is empty
+                    " ORDER BY " + COLUMN_LENDING_DATE + " DESC";
+            cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    @SuppressLint("Range") long bookId = cursor.getLong(cursor.getColumnIndex(COLUMN_BOOK_RECORD_ID));
+                    @SuppressLint("Range") String lendingDate = cursor.getString(cursor.getColumnIndex(COLUMN_LENDING_DATE));
+                    @SuppressLint("Range") String expectedReturnDate = cursor.getString(cursor.getColumnIndex(COLUMN_EXPECTED_RETURN_DATE));
+                    @SuppressLint("Range") String returnDate = cursor.getString(cursor.getColumnIndex(COLUMN_RETURN_DATE));
+                    @SuppressLint("Range") double fine = cursor.getDouble(cursor.getColumnIndex(COLUMN_FINE));
+                    @SuppressLint("Range") int fee_paid = cursor.getInt(cursor.getColumnIndex(COLUMN_FEE_PAID));
+
+                    lendingRecords.add(new LendingRecord(userId, bookId, lendingDate, expectedReturnDate, returnDate, fine, fee_paid));
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return lendingRecords;
+    }
+
 }
 
 
