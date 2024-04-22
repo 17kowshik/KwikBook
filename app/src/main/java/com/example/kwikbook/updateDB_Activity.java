@@ -239,59 +239,7 @@ public class updateDB_Activity extends AppCompatActivity {
 
             alertDialogBuilder.setView(layout);
 
-            alertDialogBuilder.setPositiveButton("Add", (dialog, which) -> {
-                // Update user to the database
-                String username = usernameEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
-                String name = nameEditText.getText().toString().trim();
-                String mobileNum = mobileNumEditText.getText().toString().trim();
-                SQLiteDatabase db = ldbHelper.getWritableDatabase();
-                if (!username.isEmpty() && !password.isEmpty() && !name.isEmpty() && !mobileNum.isEmpty()) {
-                    User newUser = new User(username,password,name,mobileNum);
-                    ldbHelper.updateUser(db,newUser);
-                    Toast.makeText(updateDB_Activity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(updateDB_Activity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            alertDialogBuilder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        });
-
-        updateUser.setOnClickListener(view -> {
-            LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(updateDB_Activity.this);
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(updateDB_Activity.this);
-            alertDialogBuilder.setTitle("Update User");
-
-            // Creating LinearLayout container for EditText fields
-            LinearLayout layout = new LinearLayout(updateDB_Activity.this);
-            layout.setOrientation(LinearLayout.VERTICAL);
-
-            // Creating EditText fields
-            final EditText usernameEditText = new EditText(updateDB_Activity.this);
-            usernameEditText.setHint("Username");
-            layout.addView(usernameEditText);
-
-            final EditText passwordEditText = new EditText(updateDB_Activity.this);
-            passwordEditText.setHint("Password");
-            passwordEditText.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            layout.addView(passwordEditText);
-
-            final EditText nameEditText = new EditText(updateDB_Activity.this);
-            nameEditText.setHint("Name");
-            layout.addView(nameEditText);
-
-            final EditText mobileNumEditText = new EditText(updateDB_Activity.this);
-            mobileNumEditText.setHint("Mobile Number");
-            mobileNumEditText.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
-            layout.addView(mobileNumEditText);
-
-            alertDialogBuilder.setView(layout);
-
-            alertDialogBuilder.setPositiveButton("Add", (dialog, which) -> {
+            alertDialogBuilder.setPositiveButton("Update", (dialog, which) -> {
                 // Update user to the database
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
@@ -345,7 +293,7 @@ public class updateDB_Activity extends AppCompatActivity {
 
             alertDialogBuilder.setView(layout);
 
-            alertDialogBuilder.setPositiveButton("Add", (dialog, which) -> {
+            alertDialogBuilder.setPositiveButton("Update", (dialog, which) -> {
                 // Update user to the database
                 String bookname = bookNameEditText.getText().toString().trim();
                 String author = authorEditText.getText().toString().trim();
@@ -368,7 +316,7 @@ public class updateDB_Activity extends AppCompatActivity {
             alertDialog.show();
         });
 
-        addLendingRecord.setOnClickListener(view -> {
+        updateLendingRecord.setOnClickListener(view -> {
             LibraryDatabaseHelper ldbHelper = new LibraryDatabaseHelper(updateDB_Activity.this);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(updateDB_Activity.this);
             alertDialogBuilder.setTitle("Update Lending Record");
@@ -408,7 +356,7 @@ public class updateDB_Activity extends AppCompatActivity {
 
             alertDialogBuilder.setView(layout);
 
-            alertDialogBuilder.setPositiveButton("Add", (dialog, which) -> {
+            alertDialogBuilder.setPositiveButton("Update", (dialog, which) -> {
                 // Add lending record to the database
                 String userRecordID = userRecordIDEditText.getText().toString().trim();
                 String bookRecordID = bookRecordIDEditText.getText().toString().trim();

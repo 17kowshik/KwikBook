@@ -128,9 +128,6 @@ public class Pay_Activity extends AppCompatActivity {
                         "<b>Lending Date:</b> " +
                         lendingRecord.getLendingDate() +
                         "<br>" +
-                        "<b>Return Date:</b> " +
-                        lendingRecord.getReturnDate() +
-                        "<br>" +
                         "<b>Fine Paid:</b> " +
                         lendingRecord.getFine() +
                         "<br>" +
@@ -144,10 +141,12 @@ public class Pay_Activity extends AppCompatActivity {
                 builder.setTitle("BILL")
                         .setMessage(Html.fromHtml(paymentDetails, Html.FROM_HTML_MODE_COMPACT))
                         .setPositiveButton("Paid", (dialog, which) -> {
-                            ldbHelper.feePaidUpdate(db, lendingRecord.getUserId(),lendingRecord.getBookId());
+                            ldbHelper.feePaidUpdate(Pay_Activity.this, db,lendingRecord.getBookId(), lendingRecord.getUserId());
+
                             payFineButton.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
                             payFineButton.setText("PAID");
                             payFineButton.setEnabled(false);
+
                         })
                         .show();
             });

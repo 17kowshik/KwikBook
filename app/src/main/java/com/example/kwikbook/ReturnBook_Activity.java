@@ -134,7 +134,8 @@ public class ReturnBook_Activity extends AppCompatActivity {
                             .setMessage("Are you sure you want to return this book?")
                             .setPositiveButton("Yes", (dialog, which) -> {
                                 ldbHelper.returnBook(db, lendingRecord.getUserId(), lendingRecord.getBookId(), returnDate);
-                                // Perform any necessary UI updates or actions after returning the book
+                                Toast.makeText(ReturnBook_Activity.this, "Returned Successfully !!", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
                             })
                             .setNegativeButton("No", (dialog, which) -> {
                                 dialog.dismiss();
