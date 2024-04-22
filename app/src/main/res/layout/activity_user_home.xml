@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".UserHome_Activity">
 
     <ImageView
@@ -91,7 +92,8 @@
         android:layout_marginTop="60dp"
         android:fontFamily="@font/dela_gothic_one"
         android:text="Welcome !!!"
-        android:textSize="20sp"
+        android:textColor="#A785C1"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

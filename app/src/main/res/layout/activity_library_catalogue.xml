@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".LibraryCatalogue_Activity">
 
     <ListView
@@ -12,6 +13,7 @@
         android:layout_width="294dp"
         android:layout_height="0dp"
         android:layout_marginBottom="61dp"
+        android:background="#FFFAEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -26,6 +28,7 @@
         android:ems="10"
         android:hint="Enter Book Name"
         android:inputType="text"
+        android:textColor="#A785C1"
         app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -40,6 +43,7 @@
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/dela_gothic_one"
         android:text="Library Catalogue"
+        android:textColor="#A785C1"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextText2"
         app:layout_constraintEnd_toEndOf="parent"

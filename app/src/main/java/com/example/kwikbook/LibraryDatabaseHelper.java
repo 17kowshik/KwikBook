@@ -250,32 +250,14 @@ public class LibraryDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void feePaidUpdate(Context context, SQLiteDatabase db, long bookId, long userId) {
-        try {
-            // Create a ContentValues object and set the fee_paid value to 0 (indicating the fee is paid)
-            ContentValues cv = new ContentValues();
-            cv.put(COLUMN_FEE_PAID, 0);
-
-            // Perform the update operation on the lending records table
-            int rowsUpdated = db.update(
-                    TABLE_LENDING_RECORDS,
-                    cv,
-                    COLUMN_BOOK_RECORD_ID + "=? AND " + COLUMN_USER_RECORD_ID + "=?",
-                    new String[]{String.valueOf(bookId), String.valueOf(userId)}
-            );
-
-            // Check if the update was successful
-            if (rowsUpdated > 0) {
-                // Display a Toast message indicating the update was successful
-                Toast.makeText(context, "Fee paid update successful!", Toast.LENGTH_SHORT).show();
-            } else {
-                // Display a Toast message indicating no rows were updated
-                Toast.makeText(context, "No rows updated. Please check if the"+bookId+" and "+userId+" are correct.", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            // Display a Toast message indicating there was an error during the update
-            Toast.makeText(context, "Error updating fee paid: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_FEE_PAID, 0);
+        db.update(
+                TABLE_LENDING_RECORDS,
+                cv,
+                COLUMN_BOOK_RECORD_ID + "=? AND " + COLUMN_USER_RECORD_ID + "=?",
+                new String[]{String.valueOf(bookId), String.valueOf(userId)}
+        );
     }
 
 

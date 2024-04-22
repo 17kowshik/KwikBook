@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".AdminHome_Activity">
 
   <ImageView
@@ -51,7 +52,8 @@
       android:layout_marginBottom="19dp"
       android:fontFamily="@font/dela_gothic_one"
       android:text="Welcome Admin!!!"
-      android:textSize="20sp"
+      android:textColor="#A785C1"
+      android:textSize="24sp"
       app:layout_constraintBottom_toTopOf="@+id/updateDBid"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.498"

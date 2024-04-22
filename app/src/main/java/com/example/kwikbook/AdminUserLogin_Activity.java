@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AdminUserLogin_Activity extends AppCompatActivity {
 
     ImageButton userLogo, adminLogo;
-    TextView hi_text, user_text, admin_text, no_ac_text, create_now_text;
+    TextView user_text, admin_text, no_ac_text, create_now_text;
     EditText login_et, pass_et;
     Button login_but;
     int flag;
@@ -29,7 +29,6 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_user_login);
         userLogo = findViewById(R.id.user_login_image_button);
         adminLogo = findViewById(R.id.admin_login_Image_button);
-        hi_text = findViewById(R.id.hi_id_tv);
         user_text = findViewById(R.id.user_tv);
         admin_text = findViewById(R.id.admin_tv);
         no_ac_text = findViewById(R.id.no_ac_tv);
@@ -47,7 +46,6 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 if (flag == 0) {
                     userLogo.setImageResource(R.drawable.user_login_logo);
-                    hi_text.setVisibility(View.INVISIBLE);
                     user_text.setVisibility(View.INVISIBLE);
                     adminLogo.setVisibility(View.INVISIBLE);
                     admin_text.setVisibility(View.INVISIBLE);
@@ -87,7 +85,6 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
                     });
 
                 } else {
-                    hi_text.setVisibility(View.VISIBLE);
                     user_text.setVisibility(View.VISIBLE);
                     adminLogo.setVisibility(View.VISIBLE);
                     admin_text.setVisibility(View.VISIBLE);
@@ -107,7 +104,6 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 if (flag == 0) {
                     userLogo.setImageResource(R.drawable.admin_login_logo);
-                    hi_text.setVisibility(View.INVISIBLE);
                     user_text.setVisibility(View.INVISIBLE);
                     userLogo.setVisibility(View.VISIBLE);
                     admin_text.setVisibility(View.INVISIBLE);
@@ -136,7 +132,6 @@ public class AdminUserLogin_Activity extends AppCompatActivity {
                     });
 
                 } else {
-                    hi_text.setVisibility(View.VISIBLE);
                     user_text.setVisibility(View.VISIBLE);
                     userLogo.setVisibility(View.VISIBLE);
                     admin_text.setVisibility(View.VISIBLE);
