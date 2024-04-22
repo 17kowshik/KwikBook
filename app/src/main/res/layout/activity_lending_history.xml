@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".LendingHistory_Activity">
 
     <ListView
@@ -14,6 +15,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="32dp"
+        android:background="#FFFAEE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="29dp"
-        android:fontFamily="@font/arbutus"
+        android:fontFamily="@font/dela_gothic_one"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textColor="#A785C1"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/LendingHistoryListview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

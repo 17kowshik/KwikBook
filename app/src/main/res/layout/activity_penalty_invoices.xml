@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".penaltyInvoices_Activity">
 
     <ListView
@@ -23,8 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="1dp"
-        android:fontFamily="@font/arbutus"
         android:text="Lending Reports"
+        android:textColor="#A785C1"
+        android:fontFamily="@font/dela_gothic_one"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/PenaltyInvoicesListView"
         app:layout_constraintEnd_toEndOf="parent"

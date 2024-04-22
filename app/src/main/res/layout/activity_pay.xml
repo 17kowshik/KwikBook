@@ -2,25 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/text_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pay your Fines"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:text="Pay your Fines"
+        android:textColor="#A785C1"
+        android:fontFamily="@font/dela_gothic_one"
+        android:textSize="24sp" />
 
     <ListView
         android:id="@+id/list_fines"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/text_header"
-        android:dividerHeight="1dp"
+        android:background="#FFFAEE"
         android:divider="#CCCCCC"
+        android:dividerHeight="1dp"
         android:visibility="visible" />
 
 

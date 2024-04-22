@@ -97,7 +97,7 @@ public class Pay_Activity extends AppCompatActivity {
             LendingRecord lendingRecord = lendingRecords.get(position);
             bookNameTextView.setText(ldbHelper.getBookName(db, (int) lendingRecord.getBookId()));
             lendingDateTextView.setText("Lending Date: " + lendingRecord.getLendingDate());
-            returnDateTextView.setText("Return Date: " + lendingRecord.getReturnDate());
+            returnDateTextView.setText("Expected Return Date: " + lendingRecord.getExpectedReturnDate());
             fineAmountTextView.setText("Fine Amount: " + lendingRecord.getFine());
             int isFinePaid = lendingRecord.getFee_paid();
             if (isFinePaid == 0) {

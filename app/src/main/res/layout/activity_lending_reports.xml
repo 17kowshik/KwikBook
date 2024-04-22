@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".lendingReports_Activity">
 
     <EditText
@@ -16,6 +17,7 @@
         android:ems="10"
         android:hint="Enter User ID"
         android:inputType="text"
+        android:textColor="#A785C1"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
+        android:backgroundTint="#A785C1"
         android:text="Generate"
         app:layout_constraintBottom_toTopOf="@+id/listView2"
         app:layout_constraintEnd_toEndOf="parent"
