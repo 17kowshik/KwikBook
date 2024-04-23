@@ -18,7 +18,7 @@
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView"
-      app:srcCompat="@drawable/admin_login_logo" />
+      app:srcCompat="@drawable/updatedb_logo" />
 
   <ImageView
       android:id="@+id/lendingReportsid"
@@ -30,7 +30,7 @@
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/updateDBid"
-      app:srcCompat="@drawable/admin_login_logo" />
+      app:srcCompat="@drawable/kb_lr" />
 
   <ImageView
       android:id="@+id/penaltyInvoicesid"
@@ -42,7 +42,7 @@
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/lendingReportsid"
-      app:srcCompat="@drawable/admin_login_logo" />
+      app:srcCompat="@drawable/kb_invoices" />
 
   <TextView
       android:id="@+id/textView"
@@ -51,7 +51,7 @@
       android:layout_marginTop="33dp"
       android:layout_marginBottom="19dp"
       android:fontFamily="@font/dela_gothic_one"
-      android:text="Welcome Admin!!!"
+      android:text="Welcome Admin"
       android:textColor="#A785C1"
       android:textSize="24sp"
       app:layout_constraintBottom_toTopOf="@+id/updateDBid"

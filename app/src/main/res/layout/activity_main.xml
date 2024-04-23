@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFAEE">
+    android:background="#000000">
 
     <ImageView
         android:id="@+id/splash_logo"
@@ -9,6 +9,6 @@
         android:layout_height="209dp"
         android:layout_centerInParent="true"
         android:scaleType="centerInside"
-        android:src="@drawable/kb_logo_render2" />
+        android:src="@drawable/kb_logo_gif" />
 
 </RelativeLayout>

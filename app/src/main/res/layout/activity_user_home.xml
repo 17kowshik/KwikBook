@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pay_iv"
         app:layout_constraintTop_toBottomOf="@+id/lendingHistory_iv"
-        app:srcCompat="@drawable/user_login_logo" />
+        app:srcCompat="@drawable/baseline_call_24" />
 
     <ImageView
         android:id="@+id/lendingHistory_iv"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/libraryCatalogue_iv"
         app:layout_constraintTop_toBottomOf="@+id/returnBook_iv"
-        app:srcCompat="@drawable/user_login_logo" />
+        app:srcCompat="@drawable/kb_lending_history" />
 
     <ImageView
         android:id="@+id/libraryCatalogue_iv"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toStartOf="@+id/lendingHistory_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lendBook_iv"
-        app:srcCompat="@drawable/user_login_logo" />
+        app:srcCompat="@drawable/kb_our_catalogue" />
 
     <ImageView
         android:id="@+id/lendBook_iv"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toStartOf="@+id/returnBook_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user_login_logo" />
+        app:srcCompat="@drawable/kb_lend_book" />
 
     <ImageView
         android:id="@+id/pay_iv"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toStartOf="@+id/contactUs_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/libraryCatalogue_iv"
-        app:srcCompat="@drawable/user_login_logo" />
+        app:srcCompat="@drawable/kb_pay_fine" />
 
     <ImageView
         android:id="@+id/returnBook_iv"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lendBook_iv"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user_login_logo" />
+        app:srcCompat="@drawable/kb_return_book" />
 
     <TextView
         android:id="@+id/userWelcomeID"
