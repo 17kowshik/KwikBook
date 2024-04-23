@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFAEE"
     tools:context=".UserSignUp_Activity">
 
     <ImageView
@@ -91,10 +92,10 @@
         android:layout_marginStart="55dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="56dp"
+        android:fontFamily="@font/dela_gothic_one"
         android:text="Sign Up for KwikBook"
         android:textAlignment="center"
         android:textColor="#A785C1"
-        android:fontFamily="@font/dela_gothic_one"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
